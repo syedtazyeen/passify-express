@@ -1,0 +1,59 @@
+// Define the generator for Prisma client
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the MongoDB datasource
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// Define the generator for Entity-Relationship Diagram 
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "./ERD.png"
+}
+
+// Define the User model
+model User {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  auth      String
+  email     String  @unique
+  hashedPwd String?
+  name      String?
+  image     String?
+  type      String
+  hostID    String? @unique @db.ObjectId
+}
+
+// Define the Host model
+model Host {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  eventIDs  String[] @db.ObjectId
+  events    Event[]  @relation(fields: [eventIDs], references: [id])
+  userID    String?  @unique @db.ObjectId
+}
+
+
+// Define the Event model
+model Event {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  hostIDs     String[] @db.ObjectId
+  hosts       Host[]   @relation(fields: [hostIDs], references: [id])
+  name        String
+  details     String?
+  price       Int?
+  discount    Int?
+  category    String?
+  subCategory String?
+  seatsTotal  Int?
+  seatsFull   Int?
+  mode        String?
+  tags        String?
+  eventLink   String?
+  refLink     String?
+  createdAt   String?
+  eventAt     String?
+}

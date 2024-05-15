@@ -132,3 +132,7 @@ dist
 
 # others
 .vscode
+
+.DS_Store
+src/.DS_Store
+.env.sample
