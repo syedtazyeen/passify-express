@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/server.js",
     "dev": "nodemon --config nodemon.json ./src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "generate" : "prisma generate --schema=./src/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
