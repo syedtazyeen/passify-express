@@ -2,11 +2,11 @@
 // for success
 export const success = (
     { message, results, statusCode }:
-        { message: string, results: any, statusCode: number }) => {
+        { message: string, results: any, statusCode?: number }) => {
     return {
         message,
         error: false,
-        code: statusCode,
+        code: statusCode || 200,
         results
     };
 };
@@ -14,31 +14,35 @@ export const success = (
 
 // for errors
 export const error = (
-    { message, statusCode }:
-        { message: string, statusCode: number }) => {
-    // List of common HTTP request code
-    const codes = [200, 201, 400, 401, 404, 403, 422, 500];
-
-    // Get matched code
-    const findCode = codes.find((code) => code == statusCode);
-
-    if (!findCode) statusCode = 500;
-    else statusCode = findCode;
+    { message, statusCode, errors }:
+        { message: string, statusCode?: number, errors?: any }) => {
 
     return {
-        message,
-        code: statusCode,
-        error: true
+        message: message,
+        code: statusCode || 500,
+        error: true,
+        errors: errors
     };
 };
 
 
 // for validation error
-export const validation = ({ errors }: { errors: any }) => {
+export const validation = ({ errors, message }: { errors?: any, message: string }) => {
     return {
-        message: "Validation errors",
+        message: message,
         error: true,
         code: 422,
-        errors
+        errors: errors
+    };
+}
+
+
+// for notFound error
+export const notFound = ({ errors, message }: { errors?: any, message: string }) => {
+    return {
+        message: message,
+        error: true,
+        code: 404,
+        errors: errors
     };
 }

@@ -24,18 +24,19 @@ model User {
   name      String?
   image     String?
   type      String
+  status    Int?    @default(1)
   hostID    String? @unique @db.ObjectId
 }
 
 // Define the Host model
 model Host {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  eventIDs  String[] @db.ObjectId
-  events    Event[]  @relation(fields: [eventIDs], references: [id])
-  userID    String?  @unique @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  eventIDs String[] @db.ObjectId
+  status   Int?     @default(1)
+  events   Event[]  @relation(fields: [eventIDs], references: [id])
+  userID   String?  @unique @db.ObjectId
 }
-
 
 // Define the Event model
 model Event {
@@ -54,6 +55,7 @@ model Event {
   tags        String?
   eventLink   String?
   refLink     String?
+  status      Int?     @default(1)
   createdAt   String?
   eventAt     String?
 }

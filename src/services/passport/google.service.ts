@@ -1,15 +1,16 @@
 import { PassportStatic } from 'passport';
 import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
 import prisma from '../../prisma';
+import { AUTH_TYPE, GOOGLE_CLIENT, SERVER, USER_TYPE } from '../../utils/constants';
 
 
 
 const GoogleService = (passport: PassportStatic) => {
 
     const options = {
-        clientID: process.env.GOOGLE_CLIENT_ID!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        callbackURL: `v${process.env.API_VERSION!}/auth/o/google/callback`
+        clientID: GOOGLE_CLIENT.ID,
+        clientSecret: GOOGLE_CLIENT.SECRET,
+        callbackURL: `v${SERVER.VERSION}/auth/o/google/callback`
     };
 
     passport.use(
@@ -35,8 +36,8 @@ const GoogleService = (passport: PassportStatic) => {
                                 email: user.email!,
                                 name: user.name,
                                 image: user.image,
-                                auth: "google",
-                                type: "user"
+                                auth: AUTH_TYPE.GOOGLE,
+                                type: USER_TYPE.USER
                             }
                         });
                     }

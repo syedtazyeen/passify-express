@@ -1,0 +1,46 @@
+openapi: 3.0.3
+info:
+  title: Passify Docs
+  description: |-
+    This is Passify Server API based on the OpenAPI 3.0 specification.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.1
+tags:
+  - name: user
+    description: Operations related to users
+  - name: event
+    description: Operations related to events
+paths:
+  /user/state:
+    get:
+      summary: "Get user state"
+      description: "Returns the state of a user."
+      tags:
+        - user
+  /user/state/host:
+    get:
+      summary: "Get user state"
+      description: "Returns the state of a user."
+      tags:
+        - user
+  /user/state/switch-creator:
+    get:
+      summary: "Get user state"
+      description: "Returns the state of a user."
+      tags:
+        - user
+  /user/profile/getByID:
+    get:
+      summary: "Get user state"
+      description: "Returns the state of a user."
+      tags:
+        - user
+        - user
+  /user/host/getByID:
+    get:
+      summary: "Get user state"
+      description: "Returns the state of a user."
+      tags:
+        - user
